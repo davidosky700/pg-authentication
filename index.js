@@ -12,13 +12,13 @@ const saltRounds = 10;
 env.config();
 
 const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,  
+  ssl: {
+    rejectUnauthorized: false, 
+  },
 });
 db.connect();
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -32,7 +32,7 @@ app.use(
     secret: process.env.MY_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, // 1 day
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 }, 
   })
 );
 
@@ -137,9 +137,9 @@ app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
-      return res.redirect("/secrets"); // Redirect back if there's an error
+      return res.redirect("/secrets");
     }
-    res.clearCookie("connect.sid"); // Clear session cookie
+    res.clearCookie("connect.sid"); 
     res.redirect("/");
   });
 });
