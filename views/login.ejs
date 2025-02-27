@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="container-sm mt-5">
+  <h1>Sign In</h1>
+
+  <div class="row">
+    <div class="col-lg-12 col-sm-12">
+
+    <form action="/login" method="POST" class="form">
+      <span class="input-span">
+        <label for="email" class="label">Email</label>
+        <input type="email" name="username" id="email"
+      /></span>
+      <span class="input-span">
+        <label for="password" class="label">Password</label>
+        <input type="password" name="password" id="password"
+      /></span>
+      <!-- <span class="span"><a href="#">Forgot password?</a></span> -->
+      <input class="submit" type="submit" value="Sign in" />
+      <span class="span">Don't have an account? <a href="/register">Sign up</a></span>
+      <span class="span"> <a href="/">Home</a></span>
+    </form>
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>
